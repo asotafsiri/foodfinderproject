@@ -4,6 +4,11 @@ class Restaurant
 		@@filepath=File.join(APP_ROOT,path)
 	end
 	attr_accessor :name, :cuisine, :price
+	def initialize (args={})
+     @name = args[:name] || ""
+     @cuisine = args[:cuisine] || ""
+     @price = args[:price] || ""
+	end
 	def self.file_exists?
 		#class shoud know if the restaurant exists
 		if @@filepath && File.exists?(@@filepath)
