@@ -1,4 +1,4 @@
-require 'support/number_helper'
+require_relative 'support/number-helper'
 class Restaurant
 	include NumberHelper
 	@@filepath=nil
@@ -24,6 +24,9 @@ class Restaurant
 		args[:price]=gets.chomp.strip
 
          return self.new(args)
+	end
+	def formatted_price
+		number_to_currency(@price)
 	end
 	def self.file_exists?
 		#class shoud know if the restaurant exists
