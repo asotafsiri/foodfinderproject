@@ -46,7 +46,21 @@ class Restaurant
 	end
 	def self.saved_restaurants
 		#read the restaurant file
+		restaurants=[]
+		if file_usable?
+		 file=File.new(@@filepath,'r')
+		 file.each_line do |line|
+			restaurants << Restaurant.new.import_line(line.chomp)
+		 end
+		 file.close
+	    end
 		#return instances of restaurant
+		return restaurants
+	end
+	def import_line(line)
+     line_array=line.splite("\t")
+     @name,@cuisine,@price=line_array
+     return self
 	end
 	def save
 		return false unless Restaurant.file_usable?
