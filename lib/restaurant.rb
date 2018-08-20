@@ -28,7 +28,7 @@ class Restaurant
 	def formatted_price
 		number_to_currency(@price)
 	end
-	def self.file_exists?
+	def self.file_exists? 
 		#class shoud know if the restaurant exists
 		if @@filepath && File.exists?(@@filepath)
 			return true
