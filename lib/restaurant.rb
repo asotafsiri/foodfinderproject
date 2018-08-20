@@ -9,6 +9,7 @@ class Restaurant
 			return true
 		else
 			return false
+		end
 	end
 	def self.file_usable?
 		return false unless @@filepath
@@ -16,14 +17,12 @@ class Restaurant
 		return false unless File.readable?(@@filepath) 
 		return false unless File.writable?(@@filepath) 
 		return true
-		end
+		
 	end
 	def self.create_file
 		#create the restaurant file
 		File.open(@@filepath,'w') unless file_exists?
 		return file_usable?
-			
-		
 	end
 	def self.saved_restaurants
 		#read the restaurant file
