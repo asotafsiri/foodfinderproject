@@ -1,5 +1,9 @@
 require_relative "restaurant"
 class Guide
+	class Config
+		@@actions=['list','find','add','quit']
+		def self.actions; @@actions; end
+	end
 	def initialize(path=nil)
 		#locate the resturant text file at path
 		Restaurant.filepath=path
@@ -22,13 +26,24 @@ class Guide
 		result=nil
 		until result== :quit
 		#wahat do you want to do? (list,find,add,quit)
-		print "> "
-		user_response=gets.chomp
+		action=get_action
 		#	do that action
-		result=do_action(user_response)
-		#		repeat until user quits
+		result=do_action(action)
+		#repeat until user quits
 	    end
 		conclusion
+	end
+	def get_action
+		action=nil
+		#keep asking for user input  until we get a valid action
+		until Guide::Config.actions.include?(action)
+		 puts "Actions: "+Guide::Config.actions.join(", ") if action
+		 print "> "
+	     user_response=gets.chomp
+	     action=user_response.downcase.strip
+		end
+      
+	  return action
 	end
 	def do_action(action)
 		case action
