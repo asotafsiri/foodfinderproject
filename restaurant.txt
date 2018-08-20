@@ -1,0 +1,4 @@
+Alborz	persian	25
+pachenar	persian	35
+TAK	PERSIAN	45
+Hot Tomala	Mexican	25
