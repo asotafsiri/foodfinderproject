@@ -50,7 +50,7 @@ class Guide
 	def do_action(action,args=[])
 		case action
 		when 'list'
-			list
+			list(args)
         when 'find'
         	keyword=args.shift
 			find(keyword )
@@ -73,15 +73,31 @@ class Guide
 			puts "\n Save Error: Restaurant not added.\n\n"
 		end
 	end
-	def list
+	def list (args=[])
+		sort_order=args.shift
+		sort_order = "name" unless ['name','cuisine','price'].include?(sort_order)
+			
 		#puts "\n Listing  Restaurants \n\n".upcase
 		output_action_header ("Listing  Restaurants")
+
 		restaurants=Restaurant.saved_restaurants
+		restaurants.sort! do |r1,r2|
+			case sort_order
+			when  'name'
+				r1.name.downcase <=> r2.name.downcase
+			when 'cuisine'
+				r1.cuisine.downcase <=> r2.cuisine.downcase
+			when 'price'
+			r1.price.to_i <=> r2.price.to_i	
+					
+		end
+	end
 		#restaurants.each do |rest|
 			#puts rest.name+" | "+rest.cuisine+" | "+rest.price
 		#	puts "#{rest.name} | #{rest.cuisine} | #{rest.formatted_price}"
 		#end
 		output_restaurant_table(restaurants)
+		puts "Sort using: list cuisine \n\n"
 	end
 	def find(keyword="")
 		output_action_header ("Find a Restaurant")
@@ -89,7 +105,7 @@ class Guide
 			restaurants=Restaurant.saved_restaurants
 			found = restaurants.select do |rest|
 				rest.name.downcase.include?(keyword.downcase) ||
-				rest.cuisine.downcase.include?(keyword.downcase) ||
+				rest.cuisine.downcase.include?(keyword.downcase) || 
 				rest.price.to_i <=keyword.to_i
 			end 
 			#output result
