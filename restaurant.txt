@@ -5,3 +5,4 @@ Hot Tomala	Mexican	25
 Masala	Indian	30
 sarchenar	kurdish	40
 haj hamid	kurdish	20
+jegar	persian	12
