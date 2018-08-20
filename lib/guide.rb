@@ -1,4 +1,4 @@
-require "restaurant"
+require_relative "restaurant"
 class Guide
 	def initialize(path=nil)
 		#locate the resturant text file at path
