@@ -75,6 +75,7 @@ class Guide
 	end
 	def list (args=[])
 		sort_order=args.shift
+		sort_order=args.shift if sort_order== 'by'
 		sort_order = "name" unless ['name','cuisine','price'].include?(sort_order)
 			
 		#puts "\n Listing  Restaurants \n\n".upcase
@@ -89,7 +90,7 @@ class Guide
 				r1.cuisine.downcase <=> r2.cuisine.downcase
 			when 'price'
 			r1.price.to_i <=> r2.price.to_i	
-					
+					 
 		end
 	end
 		#restaurants.each do |rest|
@@ -97,7 +98,7 @@ class Guide
 		#	puts "#{rest.name} | #{rest.cuisine} | #{rest.formatted_price}"
 		#end
 		output_restaurant_table(restaurants)
-		puts "Sort using: list cuisine \n\n"
+		puts "Sort using: 'list cuisine' or 'list by cuisine' \n\n"
 	end
 	def find(keyword="")
 		output_action_header ("Find a Restaurant")
